@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1,
+        "name": "Chicken Burger",
+        "price" : "$5.6",
+        "image": "https://i.ibb.co/WNYYm6jc/burger.png"
+    },
+    {
+        "id": 2,
+        "name": "Pizza",
+        "price" : "$8.3",
+        "image": "https://i.ibb.co/Y4bThQPD/pizza.png"
+
+    },
+
+    {
+        "id": 3,
+        "name": "Lasagna",
+        "price" : "$3.2",
+        "image":"https://i.ibb.co/1frFMvBm/lasagna.png"
+
+    },
+
+    {
+         "id": 4,
+        "name": "Sandwich",
+        "price" : "$4.3",
+        "image": "https://i.ibb.co/pjdrqDfF/sandwich.png"
+    },
+
+    {
+         "id": 5,
+        "name": "Noodle",
+        "price" : "$7.5",
+        "image": "https://i.ibb.co/ZpNL0mkg/spaghetti.png"
+    },
+
+    {
+         "id": 6,
+        "name": "Spring Roll",
+        "price" : "$6.3",
+        "image": "https://i.ibb.co/wZmr3qTS/spring-roll.png"
+    },
+
+    {
+         "id": 7,
+        "name": "Chicken Roll",
+        "price" : "$5.6",
+        "image": "https://i.ibb.co/7JBkVpHh/chicken-roll.png"
+    },
+
+    {
+         "id": 8,
+        "name": "Fried Chicken",
+        "price" : "$5.6",
+        "image": "https://i.ibb.co/fYJ8WNqj/fried-chicken.png"
+    }
+]
