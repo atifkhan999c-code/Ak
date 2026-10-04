@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Hurryup</title>
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fff7e6;
+        }
+
+        .login-container {
+            width: 400px;
+            max-width: 90%;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: #e7a700;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .input-box {
+            position: relative;
+        }
+
+        .input-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 13px 45px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .input-box input:focus {
+            border-color: #e7a700;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #777;
+        }
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .forgot {
+            color: #d59600;
+            text-decoration: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #e7a700;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #c98f00;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .signup {
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+        }
+
+        .signup a {
+            color: #d59600;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #555;
+            text-decoration: none;
+        }
+
+        .back-home:hover,
+        .forgot:hover,
+        .signup a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 500px) {
+            .login-container {
+                padding: 30px 20px;
+            }
+
+            .logo {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="logo">Hurryup</div>
+
+        <p class="subtitle">Login to your account</p>
+
+        <form id="loginForm">
+
+            <!-- Email -->
+            <div class="input-group">
+                <label for="email">Email</label>
+
+                <div class="input-box">
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="input-group">
+                <label for="password">Password</label>
+
+                <div class="input-box">
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                    <i
+                        class="fa-solid fa-eye password-toggle"
+                        id="togglePassword"
+                    ></i>
+                </div>
+            </div>
+
+            <!-- Options -->
+            <div class="login-options">
+
+                <label class="remember">
+                    <input type="checkbox" id="remember">
+                    Remember me
+                </label>
+
+                <a href="#" class="forgot">
+                    Forgot password?
+                </a>
+
+            </div>
+
+            <!-- Login button -->
+            <button type="submit" class="login-btn">
+                Login
+            </button>
+
+            <p id="message" class="message"></p>
+
+        </form>
+
+        <p class="signup">
+            Don't have an account?
+            <a href="#">Create Account</a>
+        </p>
+
+        <a href="index.html" class="back-home">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Home
+        </a>
+
+    </div>
+
+
+    <script>
+
+        // Show / Hide password
+        const password = document.getElementById("password");
+        const togglePassword = document.getElementById("togglePassword");
+
+        togglePassword.addEventListener("click", function () {
+
+            if (password.type === "password") {
+
+                password.type = "text";
+                togglePassword.classList.remove("fa-eye");
+                togglePassword.classList.add("fa-eye-slash");
+
+            } else {
+
+                password.type = "password";
+                togglePassword.classList.remove("fa-eye-slash");
+                togglePassword.classList.add("fa-eye");
+
+            }
+
+        });
+
+
+        // Login validation
+        const loginForm = document.getElementById("loginForm");
+        const message = document.getElementById("message");
+
+        loginForm.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const email = document.getElementById("email").value.trim();
+            const passwordValue = password.value;
+
+            if (email === "" || passwordValue === "") {
+
+                message.textContent = "Please fill all fields.";
+                message.style.color = "red";
+                return;
+
+            }
+
+            if (passwordValue.length < 6) {
+
+                message.textContent =
+                    "Password must be at least 6 characters.";
+
+                message.style.color = "red";
+                return;
+
+            }
+
+            message.textContent = "Login successful!";
+            message.style.color = "green";
+
+            // Demo login only
+            setTimeout(function() {
+                window.location.href = "index.html";
+            }, 1000);
+
+        });
+
+    </script>
+
+</body>
+</html>
