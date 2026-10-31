@@ -2,48 +2,56 @@
   {
     "id": 1,
     "name": "Chicken Burger",
+    "category": "Burgers",
     "price": "₹5.6",
     "image": "image/burger.png"
   },
   {
     "id": 2,
     "name": "Pizza",
+    "category": "Pizza",
     "price": "₹8.3",
     "image": "image/pizza.png"
   },
   {
     "id": 3,
     "name": "Lasagna",
+    "category": "Snacks",
     "price": "₹3.2",
     "image": "image/lasagna.png"
   },
   {
     "id": 4,
     "name": "Sandwich",
+    "category": "Snacks",
     "price": "₹4.3",
     "image": "image/sandwich.png"
   },
   {
     "id": 5,
     "name": "Noodle",
+    "category": "Snacks",
     "price": "₹7.5",
     "image": "image/spaghetti.png"
   },
   {
     "id": 6,
     "name": "Spring Roll",
+    "category": "Rolls",
     "price": "₹6.3",
     "image": "image/spring-roll.png"
   },
   {
     "id": 7,
     "name": "Chicken Roll",
+    "category": "Rolls",
     "price": "₹5.6",
     "image": "image/chicken-roll.png"
   },
   {
     "id": 8,
     "name": "Fried Chicken",
+    "category": "Chicken",
     "price": "₹5.6",
     "image": "image/fried-chicken.png"
   }

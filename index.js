@@ -8,6 +8,11 @@ const cartValue = document.querySelector(".cart-value");
 const hamburger = document.querySelector(".hamburger");
 const mobileMenu = document.querySelector(".mobile-menu");
 
+// Search & Filter elements
+const searchInput = document.getElementById("searchInput");
+const clearSearchBtn = document.getElementById("clearSearch");
+const categoryBtns = document.querySelectorAll(".category-btn");
+
 // Open & close cart drawer
 if (cartIcon && cartTab) {
   cartIcon.addEventListener("click", (e) => {
@@ -32,6 +37,8 @@ if (hamburger && mobileMenu) {
 
 let productList = [];
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let selectedCategory = "all";
+let searchQuery = "";
 
 // Save cart to localStorage
 const saveCart = () => {
@@ -140,7 +147,6 @@ const renderCartList = () => {
 
 // Add product to cart
 const addToCart = (product) => {
-  // Extract clean numeric price from string (e.g., "₹5.6" -> 5.6)
   const numericPrice =
     typeof product.price === "number"
       ? product.price
@@ -150,7 +156,6 @@ const addToCart = (product) => {
 
   if (existingProduct) {
     existingProduct.quantity++;
-    // Update existing item in cart drawer DOM
     const itemEl = cartList.querySelector(`.item[data-id="${product.id}"]`);
     if (itemEl) {
       itemEl.querySelector(".quantity-value").textContent = existingProduct.quantity;
@@ -173,18 +178,52 @@ const addToCart = (product) => {
   saveCart();
   updateTotals();
 
-  // Slide open the cart tab so the user sees the added item immediately
+  // Open cart drawer
   if (cartTab) {
     cartTab.classList.add("cart-tab-active");
   }
 };
 
-// Render menu product cards
-const showCards = () => {
+// Filter & display products based on search and selected category
+const filterAndShowCards = () => {
   if (!cardList) return;
   cardList.innerHTML = "";
 
-  productList.forEach((product) => {
+  const filtered = productList.filter((product) => {
+    const matchesCategory =
+      selectedCategory === "all" ||
+      (product.category &&
+        product.category.toLowerCase() === selectedCategory.toLowerCase());
+
+    const matchesSearch =
+      !searchQuery ||
+      product.name.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return matchesCategory && matchesSearch;
+  });
+
+  // Empty state when no food matches
+  if (filtered.length === 0) {
+    cardList.innerHTML = `
+      <div class="no-results">
+        <i class="fa-solid fa-utensils"></i>
+        <h3>No food items found</h3>
+        <p>We couldn't find anything matching "${searchQuery || selectedCategory}".</p>
+        <button class="reset-btn" id="resetFilterBtn">View All Menu</button>
+      </div>
+    `;
+
+    const resetBtn = document.getElementById("resetFilterBtn");
+    if (resetBtn) {
+      resetBtn.addEventListener("click", () => {
+        resetFilters();
+      });
+    }
+    return;
+  }
+
+  // Render matching food cards
+  filtered.forEach((product) => {
     const orderCard = document.createElement("div");
     orderCard.classList.add("order-card");
 
@@ -207,17 +246,65 @@ const showCards = () => {
   });
 };
 
+// Reset all search and category filters
+const resetFilters = () => {
+  selectedCategory = "all";
+  searchQuery = "";
+  if (searchInput) searchInput.value = "";
+  if (clearSearchBtn) clearSearchBtn.style.display = "none";
+
+  categoryBtns.forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.category.toLowerCase() === "all");
+  });
+
+  filterAndShowCards();
+};
+
+// Setup Search & Category Filter Listeners
+const setupFilterListeners = () => {
+  // Live search input
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value.trim();
+      if (clearSearchBtn) {
+        clearSearchBtn.style.display = searchQuery.length > 0 ? "block" : "none";
+      }
+      filterAndShowCards();
+    });
+  }
+
+  // Clear search button
+  if (clearSearchBtn) {
+    clearSearchBtn.addEventListener("click", () => {
+      if (searchInput) searchInput.value = "";
+      searchQuery = "";
+      clearSearchBtn.style.display = "none";
+      filterAndShowCards();
+      if (searchInput) searchInput.focus();
+    });
+  }
+
+  // Category buttons
+  categoryBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      categoryBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      selectedCategory = btn.dataset.category;
+      filterAndShowCards();
+    });
+  });
+};
+
 // Initialize App
 const initApp = () => {
-  // Load saved cart items first
   renderCartList();
+  setupFilterListeners();
 
-  // Fetch product catalog
   fetch("products.json")
     .then((response) => response.json())
     .then((data) => {
       productList = data;
-      showCards();
+      filterAndShowCards();
     })
     .catch((err) => console.error("Error loading products:", err));
 };

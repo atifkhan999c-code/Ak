@@ -26,7 +26,7 @@
             <a href="#">Home</a>
           </li>
           <li>
-            <a href="#">Menu</a>
+            <a href="#menu">Menu</a>
           </li>
           <li>
             <a href="#">Service</a>
@@ -60,7 +60,7 @@
             <a href="#">Home</a>
           </li>
           <li>
-            <a href="#">Menu</a>
+            <a href="#menu">Menu</a>
           </li>
           <li>
             <a href="#">Service</a>
@@ -155,60 +155,46 @@
         </div>
       </section>
 
-      <section>
+      <section id="menu">
         <div class="wrapper p-top">
           <div class="text-center">
             <h5>Our Menu</h5>
             <h2>The Most Popular</h2>
           </div>
 
-          <div class="card-list text-center flex mt-4 gap-2">
-
-              <div class="card-image">
-                <img src="burger.jpg" />
-              </div>
-              <h4>Double Beef Burger</h4>
-              <h4 class="price">$200</h4>
-              <a href="login.html" class="btn">Add to Cart</a>
+          <!-- Search & Category Filters -->
+          <div class="menu-controls">
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="searchInput" placeholder="Search delicious food..." autocomplete="off">
+              <button id="clearSearch" class="clear-search-btn" title="Clear search"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
-            
+            <div class="category-list">
+              <button class="category-btn active" data-category="all">All</button>
+              <button class="category-btn" data-category="Burgers">Burgers</button>
+              <button class="category-btn" data-category="Pizza">Pizza</button>
+              <button class="category-btn" data-category="Rolls">Rolls</button>
+              <button class="category-btn" data-category="Snacks">Snacks</button>
+              <button class="category-btn" data-category="Chicken">Chicken</button>
+            </div>
+          </div>
 
-          <!-- CART TAB -->
-          <div class="cart-tab">
-            <h3>Your Cart</h3>
-            <div class="cart-list">
-<!-- 
-              <div class="item">
-                <div class="item-image">
-                  <div class="image-container">
-                    <img src="burger.jpg" />
-                  </div>
-                  <div>
-                    <h4>Double Beef Burger</h4>
-                    <h4 class="item-total">$200</h4>
-                  </div>
-                  <div class="flex">
-                    <a href="#" class="quantity-btn">
-                      <i class="fa-solid fa-minus"></i>
-                    </a>
-                    <h4 class="quantity-value">1</h4>
-                    <a href="#" class="quantity-btn">
-                      <i class="fa-solid fa-plus"></i>
-                    </a>
-                  </div>
-              </div> -->
-              
-            </div>
+          <div class="card-list text-center flex mt-4 gap-2"></div>
+        </div>
 
-            <div class="total-container">
-              <h4>Total:</h4>
-              <h4 class="cart-total">₹0.00</h4>
-            </div>
-            <div class="btn-container flex gap-2">
-              <a href="#" class="btn close-btn">Close</a>
-              <a href="cart.html" class="btn">Check out</a>
-            </div>
+        <!-- CART TAB -->
+        <div class="cart-tab">
+          <h3>Your Cart</h3>
+          <div class="cart-list"></div>
+
+          <div class="total-container">
+            <h4>Total:</h4>
+            <h4 class="cart-total">₹0.00</h4>
+          </div>
+          <div class="btn-container flex gap-2">
+            <a href="#" class="btn close-btn">Close</a>
+            <a href="cart.html" class="btn">Check out</a>
           </div>
         </div>
       </section>
